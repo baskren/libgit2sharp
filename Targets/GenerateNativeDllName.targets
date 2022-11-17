@@ -13,13 +13,17 @@
   <Target Name="GenerateNativeDllNameCs" Inputs="$(libgit2_propsfile)" Outputs="$(NativeDllNamePath)" BeforeTargets="CoreCompile" DependsOnTargets="DefineNativeDllName">
     <PropertyGroup>
       <NativeDllNameSourceLines>
-        namespace LibGit2Sharp.Core
-        {
-        internal static class NativeDllName
-        {
-        public const string Name = "$(libgit2_filename)"%3b
-        }
-        }
+namespace LibGit2Sharp.Core
+{
+  internal static class NativeDllName
+  {
+#if __IOS__
+    public const string Name = "__Internal"%3b
+#else
+    public const string Name = "$(libgit2_filename)"%3b
+#endif
+  }
+}
       </NativeDllNameSourceLines>
     </PropertyGroup>
 

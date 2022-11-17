@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net6.0;net6.0-ios</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Description>LibGit2Sharp brings all the might and speed of libgit2, a native Git implementation, to the managed world of .NET</Description>
     <Company>LibGit2Sharp contributors</Company>
@@ -43,5 +43,14 @@
       <PackageReleaseNotes>https://github.com/libgit2/libgit2sharp/blob/$(GitCommitIdShort)/CHANGES.md#libgit2sharp-changes</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
+
+  <Target Name="B1" BeforeTargets="BeforeBuild">
+    <Message Text=" " Importance="high" />
+    <Message Text=" " Importance="high" />
+    <Message Text=" " Importance="high" />
+    <Message Text="===============================  [ $(AssemblyName) : $(TargetFramework) : $(Platform) : $(Configuration) : $(RuntimeIdentifier) ] ===============================" Importance="high" />
+  </Target>
+
+
 
 </Project>
