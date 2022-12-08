@@ -44,6 +44,13 @@ namespace LibGit2Sharp
 
         private static string GetExecutingAssemblyDirectory()
         {
+#if NET6_0_OR_GREATER || __MOBILE__
+            System.Diagnostics.Debug.WriteLine("GlobalSettings.GetExecutingAssemblyDirectory : ENTER");
+
+            var managedPath = Assembly.GetExecutingAssembly().Location;
+            managedPath = Path.GetDirectoryName(managedPath);
+            return managedPath;
+#else
             // Assembly.CodeBase is not actually a correctly formatted
             // URI.  It's merely prefixed with `file:///` and has its
             // backslashes flipped.  This is superior to EscapedCodeBase,
@@ -65,6 +72,7 @@ namespace LibGit2Sharp
 
             managedPath = Path.GetDirectoryName(managedPath);
             return managedPath;
+#endif
         }
 
         /// <summary>
