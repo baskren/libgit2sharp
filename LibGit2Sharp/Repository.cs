@@ -682,8 +682,9 @@ namespace LibGit2Sharp
 
                 if (credentialsProvider != null)
                 {
-                    var callbacks = new RemoteCallbacks(credentialsProvider);
-                    gitCallbacks = callbacks.GenerateCallbacks();
+                    //var callbacks = new RemoteCallbacks(credentialsProvider);
+                    //gitCallbacks = callbacks.GenerateCallbacks();
+                    gitCallbacks = RemoteCallbacks.GenerateCallbacks(credentialsProvider);
                 }
 
                 Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref gitCallbacks, ref proxyOptions);
@@ -769,7 +770,8 @@ namespace LibGit2Sharp
 
                 var gitFetchOptions = fetchOptionsWrapper.Options;
                 gitFetchOptions.ProxyOptions = new GitProxyOptions { Version = 1 };
-                gitFetchOptions.RemoteCallbacks = new RemoteCallbacks(options).GenerateCallbacks();
+                //gitFetchOptions.RemoteCallbacks = new RemoteCallbacks(options).GenerateCallbacks();
+                gitFetchOptions.RemoteCallbacks = RemoteCallbacks.GenerateCallbacks(options);
                 if (options.FetchOptions != null && options.FetchOptions.CustomHeaders != null)
                 {
                     gitFetchOptions.CustomHeaders =

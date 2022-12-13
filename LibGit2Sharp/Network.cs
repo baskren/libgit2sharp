@@ -122,8 +122,9 @@ namespace LibGit2Sharp
 
                 if (credentialsProvider != null)
                 {
-                    var callbacks = new RemoteCallbacks(credentialsProvider);
-                    gitCallbacks = callbacks.GenerateCallbacks();
+                    //var callbacks = new RemoteCallbacks(credentialsProvider);
+                    //gitCallbacks = callbacks.GenerateCallbacks();
+                    gitCallbacks = RemoteCallbacks.GenerateCallbacks(credentialsProvider);
                 }
 
                 Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref gitCallbacks, ref proxyOptions);
@@ -366,8 +367,9 @@ namespace LibGit2Sharp
             // Load the remote.
             using (RemoteHandle remoteHandle = Proxy.git_remote_lookup(repository.Handle, remote.Name, true))
             {
-                var callbacks = new RemoteCallbacks(pushOptions);
-                GitRemoteCallbacks gitCallbacks = callbacks.GenerateCallbacks();
+                //var callbacks = new RemoteCallbacks(pushOptions);
+                //GitRemoteCallbacks gitCallbacks = callbacks.GenerateCallbacks();
+                var gitCallbacks = RemoteCallbacks.GenerateCallbacks(pushOptions);
 
                 Proxy.git_remote_push(remoteHandle,
                                       pushRefSpecs,

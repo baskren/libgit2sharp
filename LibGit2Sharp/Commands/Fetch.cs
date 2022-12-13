@@ -41,8 +41,9 @@ namespace LibGit2Sharp
             using (var fetchOptionsWrapper = new GitFetchOptionsWrapper())
             {
 
-                var callbacks = new RemoteCallbacks(options);
-                GitRemoteCallbacks gitCallbacks = callbacks.GenerateCallbacks();
+                //var callbacks = new RemoteCallbacks(options);
+                //GitRemoteCallbacks gitCallbacks = callbacks.GenerateCallbacks();
+                var gitCallbacks = RemoteCallbacks.GenerateCallbacks(options);
 
                 // It is OK to pass the reference to the GitCallbacks directly here because libgit2 makes a copy of
                 // the data in the git_remote_callbacks structure. If, in the future, libgit2 changes its implementation

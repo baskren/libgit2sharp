@@ -97,8 +97,9 @@ namespace LibGit2Sharp
                 {
                     var gitCheckoutOptions = checkoutOptionsWrapper.Options;
 
-                    var remoteCallbacks = new RemoteCallbacks(options);
-                    var gitRemoteCallbacks = remoteCallbacks.GenerateCallbacks();
+                    //var remoteCallbacks = new RemoteCallbacks(options);
+                    //var gitRemoteCallbacks = remoteCallbacks.GenerateCallbacks();
+                    var gitRemoteCallbacks = RemoteCallbacks.GenerateCallbacks(options);
 
                     var gitSubmoduleUpdateOpts = new GitSubmoduleUpdateOptions
                     {

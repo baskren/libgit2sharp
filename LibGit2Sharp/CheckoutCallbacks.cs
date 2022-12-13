@@ -1,6 +1,9 @@
 ﻿using System;
 using LibGit2Sharp.Core;
 using LibGit2Sharp.Handlers;
+#if __IOS__
+using ObjCRuntime;
+#endif
 
 namespace LibGit2Sharp
 {
@@ -10,6 +13,23 @@ namespace LibGit2Sharp
     /// </summary>
     internal class CheckoutCallbacks
     {
+        #region Static Implementation
+        static CheckoutCallbacks Current;
+
+#if __IOS__
+        [MonoPInvokeCallback(typeof(progress_cb))]
+#endif
+        internal static void OnStaticCheckoutProgress(IntPtr str, UIntPtr completedSteps, UIntPtr totalSteps, IntPtr payload)
+            => Current?.OnGitCheckoutProgress(str, completedSteps, totalSteps, payload);
+
+#if __IOS__
+        [MonoPInvokeCallback(typeof(checkout_notify_cb))]
+#endif
+        internal static int OnStaticCheckoutNotify(CheckoutNotifyFlags why, IntPtr pathPtr, IntPtr baselinePtr, IntPtr targetPtr, IntPtr workdirPtr, IntPtr payloadPtr)
+            => Current?.OnGitCheckoutNotify(why, pathPtr, baselinePtr, targetPtr, workdirPtr, payloadPtr) ?? 0;
+        #endregion
+
+
         /// <summary>
         /// The managed delegate (e.g. from library consumer) to be called in response to the checkout progress callback.
         /// </summary>
@@ -40,7 +60,8 @@ namespace LibGit2Sharp
             {
                 if (this.onCheckoutProgress != null)
                 {
-                    return this.OnGitCheckoutProgress;
+                    //return this.OnGitCheckoutProgress;
+                    return OnStaticCheckoutProgress;
                 }
 
                 return null;
@@ -56,7 +77,8 @@ namespace LibGit2Sharp
             {
                 if (this.onCheckoutNotify != null)
                 {
-                    return this.OnGitCheckoutNotify;
+                    //return this.OnGitCheckoutNotify;
+                    return OnStaticCheckoutNotify;
                 }
 
                 return null;
@@ -71,7 +93,7 @@ namespace LibGit2Sharp
         /// <returns>The delegate with signature matching the expected native callback.</returns>
         internal static CheckoutCallbacks From(CheckoutProgressHandler onCheckoutProgress, CheckoutNotifyHandler onCheckoutNotify)
         {
-            return new CheckoutCallbacks(onCheckoutProgress, onCheckoutNotify);
+            return Current = new CheckoutCallbacks(onCheckoutProgress, onCheckoutNotify);
         }
 
         /// <summary>
