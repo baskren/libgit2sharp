@@ -27,8 +27,8 @@
     <RepositoryUrl>https://github.com/baskren/P42.Serilog.QuickLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Inital Public Release</PackageReleaseNotes>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<PackageIcon>P42.icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	<PackageIcon>square-logo.png</PackageIcon>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 
     </PropertyGroup>
@@ -38,9 +38,9 @@
     </PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\P42.icon.png" Pack="true" PackagePath="\" />
+		<None Include="..\square-logo.png" Pack="true" PackagePath="\" />
 		<None Include="..\README.md" Pack="true" PackagePath="\" />
-		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+		<None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
   
     <!-- PROJECT REFERENCES -->
