@@ -17,17 +17,21 @@ namespace LibGit2Sharp
         static CheckoutCallbacks Current;
 
 #if __IOS__
+#pragma warning disable CA1416
         [MonoPInvokeCallback(typeof(progress_cb))]
+#pragma warning restore CA1416
 #endif
         internal static void OnStaticCheckoutProgress(IntPtr str, UIntPtr completedSteps, UIntPtr totalSteps, IntPtr payload)
             => Current?.OnGitCheckoutProgress(str, completedSteps, totalSteps, payload);
 
 #if __IOS__
+#pragma warning disable CA1416
         [MonoPInvokeCallback(typeof(checkout_notify_cb))]
+#pragma warning restore CA1416
 #endif
         internal static int OnStaticCheckoutNotify(CheckoutNotifyFlags why, IntPtr pathPtr, IntPtr baselinePtr, IntPtr targetPtr, IntPtr workdirPtr, IntPtr payloadPtr)
             => Current?.OnGitCheckoutNotify(why, pathPtr, baselinePtr, targetPtr, workdirPtr, payloadPtr) ?? 0;
-        #endregion
+#endregion
 
 
         /// <summary>

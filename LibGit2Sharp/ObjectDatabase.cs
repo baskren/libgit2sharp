@@ -318,7 +318,8 @@ namespace LibGit2Sharp
             catch(Exception e)
             {
                 writestream.free(writestream_ptr);
-                throw e;
+                P42.Serilog.QuickLog.QLog.Error(e);
+                throw;
             }
 
             ObjectId id = Proxy.git_blob_create_fromstream_commit(writestream_ptr);

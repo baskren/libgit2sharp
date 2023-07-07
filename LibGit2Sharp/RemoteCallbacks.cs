@@ -15,6 +15,9 @@ namespace LibGit2Sharp
     /// </summary>
     internal class RemoteCallbacks
     {
+
+#pragma warning disable CA1416
+
         #region Static Fetch Callbacks
         static RemoteCallbacks CurrentFetchCallback;
 
@@ -110,6 +113,7 @@ namespace LibGit2Sharp
 
         #endregion
 
+#pragma warning restore CA1416
 
         #region Constructors
         private RemoteCallbacks(CredentialsHandler credentialsProvider)
