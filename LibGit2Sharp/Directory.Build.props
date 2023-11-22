@@ -45,7 +45,7 @@
   
     <!-- PROJECT REFERENCES -->
     <ItemGroup>
-  	    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+  	    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
     </ItemGroup>	
 	
     <!-- https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-targets?view=vs-2022#default-build-targets -->

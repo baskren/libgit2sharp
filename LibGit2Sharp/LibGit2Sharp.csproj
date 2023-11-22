@@ -41,10 +41,7 @@
   <ItemGroup>
     <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="[2.0.315-alpha.0.9]" PrivateAssets="none" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Serilog.QuickLog\P42.Serilog.QuickLog\P42.Serilog.QuickLog.csproj" />
+    <PackageReference Include="P42.Serilog.QuickLog" Version="1.0.7" />
   </ItemGroup>
 
   <Import Project="..\Targets\CodeGenerator.targets" />
